@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<form method="POST" class="box">
+
+    <h2>Crear Usuario</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <input type="text"
+           id="username"
+           name="username"
+           placeholder="Usuario"
+           required>
+
+    <small id="userMessage"></small>
+    
+    <input type="email"
+       name="email"
+       placeholder="Correo electrónico"
+       required>
+
+    <input type="password"
+        id="password"
+        name="password"
+        placeholder="Contraseña"
+        required>
+
+    <input type="password"
+        id="confirm_password"
+        name="confirm_password"
+        placeholder="Confirmar contraseña"
+        required>
+            
+    <small id="matchMessage"></small>
+
+    <small id="passwordHelp">
+    <br>
+    La contraseña debe tener:
+    <br>• 8 caracteres
+    <br>• Una mayúscula
+    <br>• Un número
+    <br>• Un símbolo
+    </small>
+           
+    <input type="text"
+           name="question"
+           placeholder="Pregunta secreta"
+           required>
+
+    <input type="text"
+           name="answer"
+           placeholder="Respuesta secreta"
+           required>
+
+    <button type="submit">
+        Crear cuenta
+    </button>
+
+    <a href="/">Volver</a>
+
+</form>
+
+</div>
+<script>
+
+const username = document.getElementById("username");
+const userMessage = document.getElementById("userMessage");
+
+username.addEventListener("input", () => {
+
+    let value = username.value;
+
+    let numbers = value.match(/\d/g);
+
+    let countNumbers = numbers ? numbers.length : 0;
+
+    if(value.length < 4){
+
+        userMessage.innerHTML = "✖ Mínimo 4 caracteres";
+        userMessage.style.color = "red";
+
+    }
+
+    else if(value.includes(" ")){
+
+        userMessage.innerHTML = "✖ No puede tener espacios";
+        userMessage.style.color = "red";
+
+    }
+
+    else if(countNumbers < 2){
+
+        userMessage.innerHTML = "✖ Debe tener al menos 2 números";
+        userMessage.style.color = "red";
+
+    }
+
+    else{
+
+        userMessage.innerHTML = "✔ Usuario válido";
+        userMessage.style.color = "limegreen";
+
+    }
+
+});
+
+const password = document.getElementById("password");
+const passwordHelp = document.getElementById("passwordHelp");
+
+password.addEventListener("input", () => {
+
+    let value = password.value;
+
+    let hasUpper = /[A-Z]/.test(value);
+    let hasNumber = /\d/.test(value);
+    let hasSymbol = /[@$!%*?&]/.test(value);
+    let hasLength = value.length >= 8;
+
+    if(hasUpper && hasNumber && hasSymbol && hasLength){
+
+        passwordHelp.innerHTML = "✔ Contraseña segura";
+        passwordHelp.style.color = "limegreen";
+
+    } else {
+
+        passwordHelp.innerHTML =
+        "✖ Debe tener:<br>" +
+        "• 8 caracteres<br>" +
+        "• Una mayúscula<br>" +
+        "• Un número<br>" +
+        "• Un símbolo";
+
+        passwordHelp.style.color = "red";
+    }
+
+});
+
+const confirmPassword = document.getElementById("confirm_password");
+const matchMessage = document.getElementById("matchMessage");
+
+confirmPassword.addEventListener("input", () => {
+
+    if(password.value === confirmPassword.value){
+
+        matchMessage.innerHTML = "✔ Las contraseñas coinciden";
+        matchMessage.style.color = "limegreen";
+
+    } else {
+
+        matchMessage.innerHTML = "✖ Las contraseñas no coinciden";
+        matchMessage.style.color = "red";
+    }
+
+});
+
+</script>
+</body>
+</html>

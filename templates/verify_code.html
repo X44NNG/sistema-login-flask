@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificar Codigo</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<form method="POST" class="box">
+
+    <h2>Verificar Codigo</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+
+    <input type="text"
+           name="code"
+           placeholder="Ingresa el codigo"
+           required>
+
+    <button type="submit">
+        Verificar
+    </button>
+
+</form>
+
+</div>
+
+</body>
+</html>

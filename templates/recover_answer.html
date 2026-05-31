@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pregunta Secreta</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<form method="POST"
+      action="/recover_answer"
+      class="box">
+
+    <h2>Pregunta Secreta</h2>
+
+    <p>{{ question }}</p>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+
+    <input type="hidden"
+           name="username"
+           value="{{ username }}">
+
+    <input type="text"
+           name="answer"
+           placeholder="Respuesta"
+           required>
+
+    <button type="submit">
+        Verificar
+    </button>
+
+    <a href="/">Volver al Login</a>
+    
+
+</form>
+
+</div>
+
+</body>
+</html>

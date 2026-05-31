@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<div class="box">
+
+    <h1>Bienvenido {{ user }}</h1>
+
+    <a href="/logout">
+        <button>Cerrar sesión</button>
+    </a>
+
+</div>
+
+</div>
+
+</body>
+</html>
